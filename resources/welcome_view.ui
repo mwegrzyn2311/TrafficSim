@@ -99,7 +99,7 @@ background-color:rgb(220, 138, 221)
    <sender>start</sender>
    <signal>clicked()</signal>
    <receiver>welcome_view</receiver>
-   <slot>onStart()</slot>
+   <slot>onStartClicked()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>199</x>
@@ -113,6 +113,6 @@ background-color:rgb(220, 138, 221)
   </connection>
  </connections>
  <slots>
-  <slot>onStart()</slot>
+  <slot>onStartClicked()</slot>
  </slots>
 </ui>
