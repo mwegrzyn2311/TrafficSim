@@ -1,18 +1,16 @@
-from .road import Road
+from PySide6.QtGui import QColor
+
+from .element import Element
 
 
 class Car:
-    current_road: Road
-    # calculated from end of the road (being right at the lights stop would mean being at cell 0)
-    current_cell: int
+    current_ele: Element
+    velocity: int = 0
+    # Cars may differ and have their own limitations
+    max_velocity: int
+    # Not sure whether it should be QColor or rgba structure but I guess QColor gives more options
+    color: QColor
 
-    def __init__(self, current_road: Road, current_cell: int = -1):
-        self.current_road = current_road
-        if current_cell == -1:
-            self.current_cell = current_road.num_of_cells - 1
-        else:
-            self.current_cell = current_cell
-
-    def move_to_new_road(self, new_road: Road):
-        self.current_road = new_road
-        self.current_cell = new_road.num_of_cells - 1
+    def __init__(self, current_ele: Element, max_velocity: int = 10):
+        self.current_ele = current_ele
+        self.max_velocity = max_velocity

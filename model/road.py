@@ -1,21 +1,33 @@
-from .crossroad import Crossroad
-import math
+from .node import Node
+from .element import Element
+from .car import Car
+from .vec2d import vec2d_dist
+from typing import Dict
 
 
-class Road:
-    crossroad_from: Crossroad
-    crossroad_to: Crossroad
+class Road(Element):
+    start: Node
+    end: Node
+    # TODO: Add support for more than what is currently - only one lane
     num_of_lanes: int
     with_priority: bool
     # For convenience later on, keep number of cells that should be calculated on init
     num_of_cells: int
+    speed_limit: int = 10
+    # Mapping cell no. -> Car
+    cars: Dict[int, Car]
 
-    def __init__(self, crossroad_from: Crossroad, crossroad_to: Crossroad, with_priority, num_of_lanes: int = 1):
-        self.crossroad_from = crossroad_from
-        self.crossroad_to = crossroad_to
+    def __init__(self, start: Node, end: Node, with_priority, cars: Dict[int, Car] = None, num_of_lanes: int = 1):
+        self.start = start
+        self.end = end
         self.with_priority = with_priority
         self.num_of_lanes = num_of_lanes
-        self.num_of_cells = self.__calculate_num_of_cells()
+        self.num_of_cells = vec2d_dist(start.pos, end.pos)
+        if cars is None:
+            self.cars = {}
+        else:
+            self.cars = cars
 
-    def __calculate_num_of_cells(self) -> int:
-        return math.ceil(math.pow(self.crossroad_from.x - self.crossroad_to.x, 2) + math.pow(self.crossroad_from.y - self.crossroad_to.y, 2))
+    def add_car(self, cell_no: int, car: Car):
+        self.cars[cell_no] = car
+        car.current_node = self
