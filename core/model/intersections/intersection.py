@@ -3,7 +3,8 @@ from core.model import Node, Road, Vec2d
 
 
 class Intersection(Node):
-    roads: List[Road] = []
+    roads_with_prio: List[Road] = []
+    roads_without_prio: List[Road] = []
 
     def __init__(self, pos: Vec2d):
         super().__init__(pos)
