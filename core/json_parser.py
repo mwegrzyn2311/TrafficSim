@@ -9,6 +9,7 @@ type_to_intersection = {
 }
 
 
+# TODO: Move to another dir if gets used by another parser (xml-parser or sth)
 def load_city_from_dict(data: dict) -> City:
     nodes: Dict[str, Node] = {}
     for intersection in data["intersections"]:
