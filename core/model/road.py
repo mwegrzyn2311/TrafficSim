@@ -1,8 +1,9 @@
 import math
 from typing import List
 
-from core.model import Lane, Node
+from core.model import Lane
 from .element import Element
+from .node import Node
 
 
 class Road(Element):
@@ -12,7 +13,7 @@ class Road(Element):
 	left_node: Node
 	right_node: Node
 
-	def __init__(self, right_lanes_count: int, left_lanes_count: int, left_node: Node, right_node: Node):
+	def __init__(self, right_node: Node, left_node: Node, right_lanes_count: int, left_lanes_count: int):
 		self.right_node = right_node
 		self.left_node = left_node
 		num_of_cells = math.floor((right_node.pos + left_node.pos).length())

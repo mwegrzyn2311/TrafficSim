@@ -1,54 +1,56 @@
 {
-  "roads": [
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "uuid": "0"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "uuid": "1"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "uuid": "2"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "uuid": "3"
-    }
-  ],
   "intersections": [
     {
       "intersection_type": "with_lights",
-      "roads_with_prio": [
-        "0",
-        "1"
-      ],
-      "roads_without_prio": [
-        "2",
-        "3"
-      ]
+      "pos": {
+        "x": 15,
+        "y": 15
+      },
+      "id": "0"
     },
     {
       "intersection_type": "roundabout",
-      "roads_without_prio": [
-        "0"
-      ]
+      "pos": {
+        "x": 35,
+        "y": 15
+      },
+      "id": "1"
     }
   ],
   "gateways": [
     {
-      "road": "1"
+      "pos": {
+        "x": 5,
+        "y": 15
+      },
+      "id": "g0"
     },
     {
-      "road": "2"
+      "pos": {
+        "x": 35,
+        "y": 35
+      },
+      "id": "g1"
+    }
+  ],
+  "roads": [
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "0",
+      "right_node": "1"
     },
     {
-      "road": "3"
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "0",
+      "right_node": "g0"
     },
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "1",
+      "right_node": "g1"
+    }
   ]
 }

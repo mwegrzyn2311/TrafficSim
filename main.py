@@ -12,7 +12,7 @@ print("Version: 0.0.1")
 print("Pyside version: ", PySide6.__version__)
 print("QtCore version: ", PySide6.QtCore.__version__)
 
-city = load_city_from_json("city.json")
+city = load_city_from_json("resources/city.json")
 
 app = QApplication(sys.argv)
 
