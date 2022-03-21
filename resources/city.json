@@ -1,0 +1,56 @@
+{
+  "intersections": [
+    {
+      "intersection_type": "with_lights",
+      "pos": {
+        "x": 15,
+        "y": 15
+      },
+      "id": "0"
+    },
+    {
+      "intersection_type": "roundabout",
+      "pos": {
+        "x": 35,
+        "y": 15
+      },
+      "id": "1"
+    }
+  ],
+  "gateways": [
+    {
+      "pos": {
+        "x": 5,
+        "y": 15
+      },
+      "id": "g0"
+    },
+    {
+      "pos": {
+        "x": 35,
+        "y": 35
+      },
+      "id": "g1"
+    }
+  ],
+  "roads": [
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "0",
+      "right_node": "1"
+    },
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "0",
+      "right_node": "g0"
+    },
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "1",
+      "right_node": "g1"
+    }
+  ]
+}
