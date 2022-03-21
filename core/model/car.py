@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from random import random
 from typing import Tuple
 import random
 
@@ -26,24 +27,25 @@ class Car:
 
         self.color = (random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
 
-    def get_cell_no(self) -> int or None:
+    def update_velocity_and_move(self, braking_chance: float):
+        updated_velocity = self.velocity
+
+        # TODO: Handle not only lanes but also intersections, etc.
         if isinstance(self.current_ele, Lane):
             lane: Lane = self.current_ele
-            return lane.get_car_cell(self)
-        return None
+            # 1: accelerate
+            updated_velocity += self.acceleration
 
-    def get_car_in_front(self) -> Car or None:
-        if isinstance(self.current_ele, Lane):
-            lane: Lane = self.current_ele
-            return lane.get_car_in_front(self)
-        return None
+            # 2: braking
+            curr_pos = lane.get_car_cell(self)
+            next_pos = lane.get_car_in_front(self)
+            updated_velocity = max(updated_velocity, curr_pos - next_pos)
 
-    def set_velocity(self, velocity):
-        self.velocity = max(velocity, self.max_velocity)
+            # 3: random braking
+            a = random()
+            if a < braking_chance:
+                updated_velocity -= 1
 
-    # TODO: Handle not only lanes but also intersections, etc.
-    def move(self):
-        if isinstance(self.current_ele, Lane):
-            lane: Lane = self.current_ele
-            curr_pos = self.get_cell_no()
+            # 4: update and move
+            self.velocity = max(updated_velocity, self.max_velocity)
             lane.move_car(curr_pos, self.velocity)
