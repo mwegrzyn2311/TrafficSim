@@ -3,9 +3,16 @@ from typing import Dict
 
 from core.model import *
 
+
+def vec_from_obj(obj) -> Vec2d:
+    return Vec2d(obj["x"], obj["y"])
+
+
 type_to_intersection = {
-    "with_lights": lambda obj: IntersectionWithLights(Vec2d(obj["x"], obj["y"])),
-    "roundabout": lambda obj: Roundabout(Vec2d(obj["x"], obj["y"]))
+    "with_lights": lambda obj: IntersectionWithLights(vec_from_obj(obj)),
+    "roundabout": lambda obj: Roundabout(vec_from_obj(obj)),
+    "with_signs": lambda obj: IntersectionWithSigns(vec_from_obj(obj)),
+    "prio_to_right": lambda obj: IntersectionWithPrioToRight(vec_from_obj(obj))
 }
 
 
