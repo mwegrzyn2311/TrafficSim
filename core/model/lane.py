@@ -3,6 +3,7 @@ from .car import Car
 from typing import Dict
 
 
+# Lane consists of cells numbered from 0 to num of cells - 1 (where 0 is the end for ease of calculations)
 class Lane(Element):
     with_priority: bool
     # For convenience later on, keep number of cells that should be calculated on init
@@ -30,3 +31,13 @@ class Lane(Element):
 
         self.cars[cell_from + distance] = self.cars[cell_from]
         del self.cars[cell_from]
+
+    def get_car_cell(self, car: Car):
+        return list(self.cars.keys())[list(self.cars.values()).index(car)]
+
+    def get_car_in_front(self, car: Car) -> Car or None:
+        cars_vals = list(self.cars.values())
+        try:
+            return cars_vals[cars_vals.index(car) - 1]
+        except (ValueError, IndexError):
+            return None
