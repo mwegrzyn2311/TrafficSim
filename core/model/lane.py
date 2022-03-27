@@ -1,6 +1,8 @@
 from .element import Element
-from .car import Car
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .car import Car
 
 
 # Lane consists of cells numbered from 0 to num of cells - 1 (where 0 is the end for ease of calculations)
@@ -10,16 +12,16 @@ class Lane(Element):
     num_of_cells: int
     speed_limit: int = 10
     # Mapping cell no. -> Car
-    cars: Dict[int, Car]
+    cars: Dict[int, 'Car']
 
-    def __init__(self, cars: Dict[int, Car] = None, num_of_cells: int = 1):
+    def __init__(self, cars: Dict[int, 'Car'] = None, num_of_cells: int = 1):
         self.num_of_cells = num_of_cells
         if cars is None:
             self.cars = {}
         else:
             self.cars = cars
 
-    def add_car(self, cell_no: int, car: Car) -> None:
+    def add_car(self, cell_no: int, car: 'Car') -> None:
         self.cars[cell_no] = car
         car.current_node = self
 
@@ -32,10 +34,10 @@ class Lane(Element):
         self.cars[cell_from + distance] = self.cars[cell_from]
         del self.cars[cell_from]
 
-    def get_car_cell(self, car: Car):
+    def get_car_cell(self, car: 'Car'):
         return list(self.cars.keys())[list(self.cars.values()).index(car)]
 
-    def get_car_in_front(self, car: Car) -> Car or None:
+    def get_car_in_front(self, car: 'Car') -> 'Car' or None:
         cars_vals = list(self.cars.values())
         try:
             return cars_vals[cars_vals.index(car) - 1]
