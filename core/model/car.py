@@ -49,3 +49,9 @@ class Car:
             # 4: update and move
             self.velocity = max(updated_velocity, self.max_velocity)
             lane.move_car(curr_pos, self.velocity)
+
+    def get_curr_lane_cell(self) -> int:
+        if not isinstance(self.current_ele, Lane):
+            return -1
+
+        return self.current_ele.get_car_cell(self)

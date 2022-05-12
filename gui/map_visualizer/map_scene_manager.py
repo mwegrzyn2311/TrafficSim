@@ -1,12 +1,11 @@
-from typing import List, Dict
+from typing import List
 
-from PySide6.QtWidgets import QGraphicsScene, QGraphicsEllipseItem
+from PySide6.QtWidgets import QGraphicsScene
 
-from core.model import City, Gateway, Road, Intersection, Car
+from core.model import City, Gateway, Road, Intersection
 from gui.map_visualizer.item.gateway_item import GatewayItem
 from gui.map_visualizer.item.road_item import RoadItem
 from gui.map_visualizer.item.intersection_item import IntersectionItem
-from gui.map_visualizer.item.car_item import CarItem
 
 
 class MapSceneManager:
@@ -14,7 +13,6 @@ class MapSceneManager:
 	_gateways: List[GatewayItem]
 	_roads: List[RoadItem]
 	_intersections: List[IntersectionItem]
-	_cars: Dict[Car, CarItem]
 
 	def __init__(self, city: City):
 		self.scene = QGraphicsScene()
@@ -48,17 +46,9 @@ class MapSceneManager:
 		road_item = RoadItem(road)
 		self._roads.append(road_item)
 		self.scene.addItem(road_item.item)
+		self.scene.addItem(road_item.car_items)
 
 	def create_intersection(self, intersection: Intersection):
 		intersection_item = IntersectionItem(intersection)
 		self._intersections.append(intersection_item)
 		self.scene.addItem(intersection_item.item)
-
-	def create_car(self, car: Car):
-		car_item = CarItem(car)
-		self._cars[car] = car_item
-		self.scene.addItem(car_item.item)
-
-	def remove_car(self, car: Car):
-		self.scene.removeItem(self._cars[car])
-		self._cars.pop(car)

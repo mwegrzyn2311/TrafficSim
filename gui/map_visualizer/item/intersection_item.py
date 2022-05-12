@@ -2,7 +2,6 @@ from PySide6.QtGui import QColorConstants
 from PySide6.QtCore import QLineF
 from PySide6.QtWidgets import QGraphicsItem, QGraphicsItemGroup, QGraphicsRectItem
 
-
 from core.model import Intersection
 
 from gui.map_visualizer.item.common import CELL_SIZE
