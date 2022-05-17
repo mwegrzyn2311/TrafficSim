@@ -2,12 +2,12 @@ from PySide6.QtGui import QColorConstants
 from PySide6.QtWidgets import QGraphicsEllipseItem, QGraphicsItem
 
 from core.model import Gateway
-from gui.map_visualizer.item.common import CELL_SIZE
+from gui.map_visualizer.item.common import CELL_SIZE, GraphicItem
 
 GATEWAY_DIAMETER = 10
 
 
-class GatewayItem:
+class GatewayItem(GraphicItem):
 	item: QGraphicsItem
 	gateway: Gateway
 

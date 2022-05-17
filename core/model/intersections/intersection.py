@@ -13,3 +13,9 @@ class Intersection(Node):
         assert(road not in self.roads)
 
         self.roads.append(road)
+
+    def get_roads(self) -> List["Road"]:
+        return self.roads
+
+    def step(self):
+        pass

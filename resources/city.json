@@ -20,7 +20,7 @@
       "intersection_type": "with_lights",
       "pos": {
         "x": 50,
-        "y": 0
+        "y": 20
       },
       "id": "2"
     }
@@ -32,6 +32,13 @@
         "y": 0
       },
       "id": "g0"
+    },
+    {
+      "pos": {
+        "x": 50,
+        "y": 50
+      },
+      "id": "g1"
     }
   ],
   "roads": [
@@ -52,6 +59,13 @@
       "right_lanes_count": 1,
       "left_node": "0",
       "right_node": "g0"
+    },
+
+    {
+      "left_lanes_count": 1,
+      "right_lanes_count": 1,
+      "left_node": "g1",
+      "right_node": "2"
     }
   ]
 }

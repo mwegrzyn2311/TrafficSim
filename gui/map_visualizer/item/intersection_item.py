@@ -4,12 +4,12 @@ from PySide6.QtWidgets import QGraphicsItem, QGraphicsItemGroup, QGraphicsRectIt
 
 from core.model import Intersection
 
-from gui.map_visualizer.item.common import CELL_SIZE
+from gui.map_visualizer.item.common import CELL_SIZE, GraphicItem
 
 GATEWAY_DIAMETER = 10
 
 
-class IntersectionItem:
+class IntersectionItem(GraphicItem):
     item: QGraphicsItem
     intersection: Intersection
 

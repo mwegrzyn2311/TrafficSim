@@ -10,7 +10,7 @@ class Lane(Element):
     with_priority: bool
     # For convenience later on, keep number of cells that should be calculated on init
     num_of_cells: int
-    speed_limit: int = 10
+    speed_limit: int = 3
     # Mapping cell no. -> Car
     cars: Dict[int, 'Car']
 
@@ -23,7 +23,7 @@ class Lane(Element):
 
     def add_car(self, cell_no: int, car: 'Car') -> None:
         self.cars[cell_no] = car
-        car.current_node = self
+        car.current_element = self
 
     def remove_car(self, cell_no: int) -> None:
         del self.cars[cell_no]
@@ -33,6 +33,13 @@ class Lane(Element):
 
         self.cars[cell_from + distance] = self.cars[cell_from]
         del self.cars[cell_from]
+
+    def get_cell(self, pos):
+        assert(pos < self.num_of_cells)
+        if pos in self.cars.keys():
+            return self.cars[pos]
+        else:
+            return None
 
     def get_car_cell(self, car: 'Car'):
         return list(self.cars.keys())[list(self.cars.values()).index(car)]

@@ -69,6 +69,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>step_button</sender>
+   <signal>clicked()</signal>
+   <receiver>simulation_view</receiver>
+   <slot>step()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>playPause()</slot>
