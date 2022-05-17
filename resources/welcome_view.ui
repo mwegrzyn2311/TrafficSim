@@ -184,27 +184,27 @@
     <string>Map path</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="browse">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>110</y>
+     <width>87</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Browse</string>
+   </property>
+  </widget>
   <widget class="QLineEdit" name="map_path">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>110</y>
-     <width>301</width>
+     <width>281</width>
      <height>27</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="map_path_browse">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>110</y>
-     <width>26</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>...</string>
    </property>
   </widget>
  </widget>
@@ -226,8 +226,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>browse</sender>
+   <signal>clicked()</signal>
+   <receiver>welcome_view</receiver>
+   <slot>onMapPathBrowse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>123</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStartClicked()</slot>
+  <slot>onMapPathBrowse()</slot>
  </slots>
 </ui>
