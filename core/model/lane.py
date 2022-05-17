@@ -13,9 +13,11 @@ class Lane(Element):
     speed_limit: int = 3
     # Mapping cell no. -> Car
     cars: Dict[int, 'Car']
+    road: 'Road'
 
-    def __init__(self, cars: Dict[int, 'Car'] = None, num_of_cells: int = 1):
+    def __init__(self, road: 'Road', cars: Dict[int, 'Car'] = None, num_of_cells: int = 1):
         self.num_of_cells = num_of_cells
+        self.road = road
         if cars is None:
             self.cars = {}
         else:

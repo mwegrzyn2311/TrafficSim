@@ -74,7 +74,3 @@ class SimulationController(QThread):
             if not self.is_paused:
                 self.step_semaphore.release()
             time.sleep(self.sleep_time)
-
-    def join(self, timeout: float = None):
-        self.is_paused = True
-        super().join(timeout)

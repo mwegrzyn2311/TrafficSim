@@ -16,3 +16,6 @@ class WelcomeViewController(SwitchableView):
 	@Slot()
 	def onStartClicked(self):
 		self.trigger_switch_view.emit("simulation_view")
+
+	def preferred_size(self):
+		return 400, 300

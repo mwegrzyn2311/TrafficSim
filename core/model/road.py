@@ -18,6 +18,6 @@ class Road(Element):
 		self.left_node = left_node
 		num_of_cells = math.floor((right_node.pos - left_node.pos).length()) - right_node.radius - left_node.radius
 
-		self.right_lanes = [Lane(num_of_cells=num_of_cells) for i in range(right_lanes_count)]
-		self.left_lanes = [Lane(num_of_cells=num_of_cells) for i in range(left_lanes_count)]
+		self.right_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(right_lanes_count)]
+		self.left_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(left_lanes_count)]
 

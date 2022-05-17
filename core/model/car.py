@@ -28,7 +28,7 @@ class Car:
         self.color = (random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
 
     def get_curr_lane_cell(self) -> int:
-        if not isinstance(self.current_ele, Lane):
+        if not isinstance(self.current_element, Lane):
             return -1
 
-        return self.current_ele.get_car_cell(self)
+        return self.current_element.get_car_cell(self)
