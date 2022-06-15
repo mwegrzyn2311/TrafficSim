@@ -12,3 +12,10 @@ class City:
 	def __init__(self, intersections: List[Intersection], gateways: List[Gateway]):
 		self.intersections = intersections
 		self.gateways = gateways
+
+	def step(self):
+		for intersection in self.intersections:
+			intersection.step()
+
+		for gateway in self.gateways:
+			gateway.step()

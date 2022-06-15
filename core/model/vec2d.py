@@ -13,6 +13,9 @@ class Vec2d:
     def length(self) -> float:
         return math.hypot(self.x, self.y)
 
+    def __equals__(self, other: Vec2d) -> bool:
+        return self.x == other.x and self.y == other.y
+
     def __add__(self, other: Vec2d) -> Vec2d:
         return Vec2d(self.x + other.x, self.y + other.y)
 

@@ -7,3 +7,6 @@ class SwitchableView(QWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
+
+    def preferred_size(self):
+        return None

@@ -16,8 +16,8 @@ class Road(Element):
 	def __init__(self, right_node: Node, left_node: Node, right_lanes_count: int, left_lanes_count: int):
 		self.right_node = right_node
 		self.left_node = left_node
-		num_of_cells = math.floor((right_node.pos + left_node.pos).length())
+		num_of_cells = math.floor((right_node.pos - left_node.pos).length()) - right_node.radius - left_node.radius
 
-		self.right_lanes = [Lane(num_of_cells=num_of_cells) for i in range(right_lanes_count)]
-		self.left_lanes = [Lane(num_of_cells=num_of_cells) for i in range(left_lanes_count)]
+		self.right_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(right_lanes_count)]
+		self.left_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(left_lanes_count)]
 
