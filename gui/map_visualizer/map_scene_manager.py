@@ -53,5 +53,6 @@ class MapSceneManager:
 		self.scene.addItem(intersection_item.item)
 
 	def update(self):
+		print("Updating ui...")
 		for road in self._roads:
 			road.update()

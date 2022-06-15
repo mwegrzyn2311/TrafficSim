@@ -1,7 +1,7 @@
 import math
 from typing import Dict, List
 
-from PySide6.QtCore import QLineF, QPointF
+from PySide6.QtCore import QLineF, QPointF, Qt
 from PySide6.QtGui import QColorConstants, QColor
 from PySide6.QtWidgets import QGraphicsItem, QGraphicsItemGroup, QGraphicsLineItem, QGraphicsRectItem
 
@@ -87,35 +87,42 @@ class RoadItem(GraphicItem):
         self.item.addToGroup(static_group)
 
     def _create_car(self, lane_no, cell_no, start_point, end_point, radius, car_color):
+        print(f"creating car at cell = {cell_no}")
         line_vector = QLineF(start_point, end_point)
 
         dir_unit_vec: QLineF = line_vector.unitVector()
 
         start_node_offset: QPointF = QPointF(dir_unit_vec.dx() * (radius + 0.5),
                                              dir_unit_vec.dy() * (radius + 0.5))
-        start_point += start_node_offset
         cell_offset: QPointF = QPointF(dir_unit_vec.dx() * cell_no, dir_unit_vec.dy() * cell_no)
 
         normal: QLineF = line_vector.normalVector().unitVector()
         normal_diff = QPointF(normal.dx(), normal.dy())
-        start: QPointF = start_point + cell_offset + normal_diff * (lane_no - 0.5)
+        start: QPointF = start_point + start_node_offset + cell_offset + normal_diff * (lane_no - 0.5)
+        print(f"start={start}")
 
         car_item = QGraphicsItemGroup()
-        car_bot_x: int = start.x() - 0.4 * dir_unit_vec.dx() - 0.2 * dir_unit_vec.normalVector().dx()
-        car_bot_y: int = start.y() - 0.4 * dir_unit_vec.dy() - 0.2 * dir_unit_vec.normalVector().dy()
+        car_bot_x: float = (start.x() - 0.25) * CELL_SIZE
+        car_bot_y: float = (start.y() - 0.4) * CELL_SIZE
         car_bottom = QGraphicsRectItem(car_bot_x, car_bot_y, 0.4 * CELL_SIZE, 0.8 * CELL_SIZE)
         car_bottom.setBrush(QColor(car_color[0], car_color[1], car_color[2]))
+        car_bottom.setZValue(15)
         car_item.addToGroup(car_bottom)
 
-        car_wind_x: int = start.x() - 0.3 * dir_unit_vec.dx() - 0.1 * dir_unit_vec.normalVector().dx()
-        car_wind_y: int = start.y() - 0.3 * dir_unit_vec.dy() - 0.1 * dir_unit_vec.normalVector().dy()
+        car_wind_x: float = (start.x() - 0.15) * CELL_SIZE
+        car_wind_y: float = (start.y() - 0.2) * CELL_SIZE
         car_windows = QGraphicsRectItem(car_wind_x, car_wind_y, 0.2 * CELL_SIZE, 0.5 * CELL_SIZE)
         car_windows.setBrush(QColorConstants.DarkCyan)
+        car_windows.setPen(Qt.NoPen)
+        car_windows.setZValue(16)
         car_item.addToGroup(car_windows)
 
-        car_top_x: int = start.x() - 0.2 * dir_unit_vec.dx() - 0.1 * dir_unit_vec.normalVector().dx()
-        car_top_y: int = start.y() - 0.2 * dir_unit_vec.dy() - 0.1 * dir_unit_vec.normalVector().dy()
+        car_top_x: float = (start.x() - 0.15) * CELL_SIZE
+        car_top_y: float = (start.y() - 0.1) * CELL_SIZE
         car_top = QGraphicsRectItem(car_top_x, car_top_y, 0.2 * CELL_SIZE, 0.3 * CELL_SIZE)
+        car_top.setBrush(QColor(car_color[0], car_color[1], car_color[2]))
+        car_top.setPen(Qt.NoPen)
+        car_top.setZValue(17)
         car_item.addToGroup(car_top)
 
         return car_item

@@ -31,6 +31,7 @@ class Lane(Element):
         del self.cars[cell_no]
 
     def move_car(self, cell_from: int, distance: int) -> None:
+        print(f"moving a car from = {cell_from} by distance = {distance}")
         assert(cell_from + distance < self.num_of_cells)
 
         self.cars[cell_from + distance] = self.cars[cell_from]

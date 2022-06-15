@@ -1,4 +1,4 @@
-CELL_SIZE = 5.0
+CELL_SIZE = 20.0
 
 class GraphicItem:
 	def update(self):
