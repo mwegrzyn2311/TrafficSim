@@ -27,18 +27,23 @@ class BasicDriver(AbstractDriver):
 
 		lane: Lane = self.car.current_element
 		position = lane.get_car_cell(self.car)
-		next_car_position = lane.get_car_cell(self.car)
-		self.car.velocity = max(self.car.velocity, position - next_car_position)
+		next_car = lane.get_car_in_front(self.car)
+		if next_car is None:
+			# No need for breaking
+			return
+		next_car_position = lane.get_car_cell(next_car)
+		assert (next_car_position > position)
+		self.car.velocity = min(self.car.velocity, next_car_position - position - 1)
 
 	def randomization(self):
 		breaking = random.random()
 		if breaking < self.breaking_chance:
-			self.car.velocity -= 1
+			self.car.velocity = max(0, self.car.velocity - 1)
 
 	def movement(self):
 		assert(isinstance(self.car.current_element, Lane))
 
-		self.car.velocity = max(self.car.velocity, self.car.max_velocity)
+		self.car.velocity = min(self.car.velocity, self.car.max_velocity)
 		lane: Lane = self.car.current_element
 		lane.move_car(lane.get_car_cell(self.car), self.car.velocity)
 
