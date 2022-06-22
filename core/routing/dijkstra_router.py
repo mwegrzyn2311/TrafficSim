@@ -77,4 +77,4 @@ def calculate_dijkstra_route(
 		path.append(last_d_node.node)
 		last_d_node = last_d_node.previous
 
-	return list(reversed(path[1::]))
+	return list(reversed(path))[1::]

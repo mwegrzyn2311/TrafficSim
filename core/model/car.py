@@ -15,6 +15,8 @@ class Car:
     acceleration: int
     # Cars may differ and have their own limitations
     max_velocity: int
+    next_planned_node_idx: int
+    # TODO: Add typed next_node here
 
     color: Tuple[int, int, int]
 
@@ -25,7 +27,16 @@ class Car:
         self.velocity = 0
         self.acceleration = 1
 
+        self.next_planned_node_idx = -1
+        self.planned_route = []
+        self.next_planned_node = None
+
         self.color = (random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
+
+    def plan_next_node(self):
+        self.next_planned_node_idx += 1
+        if self.next_planned_node_idx < len(self.planned_route):
+            self.next_planned_node = self.planned_route[self.next_planned_node_idx]
 
     def get_curr_lane_cell(self) -> int:
         if not isinstance(self.current_element, Lane):

@@ -5,10 +5,11 @@ from core.model import Node, Road, Vec2d, Car
 
 class Gateway(Node):
 	road: Road
-	car_queue: List[Car] = []
+	car_queue: List[Car]
 
 	def __init__(self, pos: Vec2d):
 		super().__init__(pos)
+		self.car_queue = []
 
 	def add_road(self, road: Road):
 		self.road = road
@@ -24,5 +25,7 @@ class Gateway(Node):
 			to_push = self.car_queue.pop(0)
 			for lane in self.road.right_lanes:
 				if not lane.get_cell(0):
+					debug_pos = lane.road.left_node.pos
+					print(f"Adding to right to ({debug_pos.x}, {debug_pos.y}) while at ({self.pos.x}, {self.pos.y})")
 					lane.add_car(0, to_push)
 					break

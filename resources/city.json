@@ -1,7 +1,7 @@
 {
   "intersections": [
     {
-      "intersection_type": "with_lights",
+      "intersection_type": "prio_to_right",
       "pos": {
         "x": 0,
         "y": 0
@@ -9,7 +9,7 @@
       "id": "0"
     },
     {
-      "intersection_type": "with_lights",
+      "intersection_type": "prio_to_right",
       "pos": {
         "x": 0,
         "y": 50
@@ -17,7 +17,7 @@
       "id": "1"
     },
     {
-      "intersection_type": "with_lights",
+      "intersection_type": "prio_to_right",
       "pos": {
         "x": 50,
         "y": 0
@@ -64,8 +64,8 @@
     {
       "left_lanes_count": 1,
       "right_lanes_count": 1,
-      "left_node": "g1",
-      "right_node": "2"
+      "left_node": "2",
+      "right_node": "g1"
     }
   ]
 }

@@ -50,7 +50,7 @@ class SimulationController(QThread):
     def _generate_traffic(self):
         gateways = self.city.gateways
         for i in range(1):
-            src_dest_gateways = random.choices(gateways, k=2)
+            src_dest_gateways = random.sample(gateways, k=2)
             src_gateway = src_dest_gateways[0]
             dest_gateway = src_dest_gateways[1]
             car = Car(src_gateway)

@@ -3,6 +3,8 @@ from typing import Dict, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .car import Car
+    from .intersections.intersection import Intersection
+    from .gateway import Gateway
 
 
 # Lane consists of cells numbered from 0 to num of cells - 1 (where 0 is the end for ease of calculations)
@@ -29,24 +31,39 @@ class Lane(Element):
         car.current_element = self
 
     def remove_car(self, cell_no: int) -> None:
+        self.cars[cell_no].current_element = None
         del self.cars[cell_no]
+
+    def remove_car_by_car(self, car: 'Car') -> None:
+        self.remove_car(self.get_car_cell(car))
 
     def last_unoccupied_cell(self):
         for i in range(self.num_of_cells - 1, 0, -1):
-            if i in self.cars.keys():
+            if i not in self.cars.keys():
                 return i
         return -1
 
-
     def move_car(self, cell_from: int, distance: int) -> None:
-        print(f"moving a car from = {cell_from} by distance = {distance}")
-        if distance == 0:
+        if distance == 0 or cell_from == self.num_of_cells - 1:
             return
-        if cell_from + distance >= self.num_of_cells:
+        if cell_from + distance >= self.num_of_cells - 1:
             # This is so that car stops if it reaches the end of the road. Braking would probably be nicer, but let's stick with it for now
+            self.cars[cell_from].velocity = 0
             last_unoccupied_cell = self.last_unoccupied_cell()
             assert (last_unoccupied_cell != -1)
-            self.cars[last_unoccupied_cell] = self.cars[cell_from]
+            # We have to check if its not that this car just isn't moving
+            if last_unoccupied_cell > cell_from:
+                self.cars[last_unoccupied_cell] = self.cars[cell_from]
+                next_node = self.road.get_end_node(self)
+                next_node.add_car_to_queue(self.cars[last_unoccupied_cell])
+        #         if isinstance(next_node, 'Intersection'):
+        #             next_node.add_car_to_queue(self.cars[last_unoccupied_cell])
+        #         elif isinstance(next_node, Gateway):
+        #             # TODO: Destroy car
+        #             pass
+        #         else:
+        #             # TODO: Handle
+        #             pass
         else:
             assert cell_from + distance not in self.cars.keys()
             self.cars[cell_from + distance] = self.cars[cell_from]
