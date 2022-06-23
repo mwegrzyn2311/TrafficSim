@@ -1,11 +1,10 @@
 import math
-from typing import Dict, List
 
 from PySide6.QtCore import QLineF, QPointF, Qt
 from PySide6.QtGui import QColorConstants, QColor
-from PySide6.QtWidgets import QGraphicsItem, QGraphicsItemGroup, QGraphicsLineItem, QGraphicsRectItem
+from PySide6.QtWidgets import QGraphicsItemGroup, QGraphicsRectItem
 
-from core.model import Road, Lane, Car
+from core.model import Road, Lane
 from gui.map_visualizer.item.common import CELL_SIZE, GraphicItem
 
 LANE_WIDTH = 2
