@@ -17,6 +17,9 @@ class Gateway(Node):
 	def get_roads(self) -> List["Road"]:
 		return [self.road]
 
+	def get_type_str(self) -> str:
+		return "gateway"
+
 	def add_car(self, car: Car) -> None:
 		self.car_queue.append(car)
 
@@ -25,7 +28,5 @@ class Gateway(Node):
 			to_push = self.car_queue.pop(0)
 			for lane in self.road.right_lanes:
 				if not lane.get_cell(0):
-					debug_pos = lane.road.left_node.pos
-					print(f"Adding to right to ({debug_pos.x}, {debug_pos.y}) while at ({self.pos.x}, {self.pos.y})")
 					lane.add_car(0, to_push)
 					break

@@ -19,7 +19,6 @@ class BasicDriver(AbstractDriver):
 		nodes: List[Node] = self.city.intersections
 		nodes += self.city.gateways
 		self.car.planned_route = calculate_dijkstra_route(self.src_gateway,  self.dest_gateway, nodes)
-		print(len(self.car.planned_route))
 		# We skip first element as its the closest one and we know how to get there while this is needed to navigate to the next one
 		self.car.next_planned_node_idx = 1
 		if self.car.next_planned_node_idx < len(self.car.planned_route):
@@ -56,7 +55,6 @@ class BasicDriver(AbstractDriver):
 	def step(self):
 
 		current_element: Element = self.car.current_element
-		print(current_element)
 		if isinstance(current_element, Lane):
 			self.acceleration()
 			self.breaking()

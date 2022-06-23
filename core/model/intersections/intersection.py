@@ -57,6 +57,9 @@ class Intersection(Node):
     def get_roads(self) -> List["Road"]:
         return self.roads
 
+    def get_type_str(self) -> str:
+        return "intersection"
+
     def add_car_to_queue(self, car: Car):
         # FIXME: Handle other car elements than lane
         self.queues[car.current_element.road].place_car(car, self)

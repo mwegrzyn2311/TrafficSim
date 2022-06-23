@@ -23,3 +23,7 @@ class Node(Element):
     @abstractmethod
     def get_roads(self) -> List["Road"]:
         pass
+
+    @abstractmethod
+    def get_type_str(self) -> str:
+        return ""

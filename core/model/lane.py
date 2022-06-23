@@ -3,8 +3,6 @@ from typing import Dict, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .car import Car
-    from .intersections.intersection import Intersection
-    from .gateway import Gateway
 
 
 # Lane consists of cells numbered from 0 to num of cells - 1 (where 0 is the end for ease of calculations)
@@ -26,7 +24,6 @@ class Lane(Element):
             self.cars = cars
 
     def add_car(self, cell_no: int, car: 'Car') -> None:
-        print(f"Adding car to a cell at {cell_no}")
         self.cars[cell_no] = car
         car.current_element = self
 
@@ -53,17 +50,19 @@ class Lane(Element):
             assert (last_unoccupied_cell != -1)
             # We have to check if its not that this car just isn't moving
             if last_unoccupied_cell > cell_from:
-                self.cars[last_unoccupied_cell] = self.cars[cell_from]
                 next_node = self.road.get_end_node(self)
-                next_node.add_car_to_queue(self.cars[last_unoccupied_cell])
-        #         if isinstance(next_node, 'Intersection'):
-        #             next_node.add_car_to_queue(self.cars[last_unoccupied_cell])
-        #         elif isinstance(next_node, Gateway):
-        #             # TODO: Destroy car
-        #             pass
-        #         else:
-        #             # TODO: Handle
-        #             pass
+                next_node_type = next_node.get_type_str()
+                if next_node_type == 'intersection':
+                    self.cars[last_unoccupied_cell] = self.cars[cell_from]
+                    next_node.add_car_to_queue(self.cars[last_unoccupied_cell])
+                elif next_node_type == 'gateway':
+                    if next_node != self.cars[cell_from].planned_route[-1]:
+                        raise Exception("ERR: Car has reached gateway that is not its goal")
+                    print(f"Car {self.cars[cell_from]} has reached its goal")
+                    self.cars[cell_from].current_element = None
+                else:
+                    # TODO: Handle
+                    pass
         else:
             assert cell_from + distance not in self.cars.keys()
             self.cars[cell_from + distance] = self.cars[cell_from]
