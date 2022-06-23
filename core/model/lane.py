@@ -58,7 +58,6 @@ class Lane(Element):
                 elif next_node_type == 'gateway':
                     if next_node != self.cars[cell_from].planned_route[-1]:
                         raise Exception("ERR: Car has reached gateway that is not its goal")
-                    print(f"Car {self.cars[cell_from]} has reached its goal")
                     self.cars[cell_from].current_element = None
                     self.cars[cell_from].driver.unregister()
                 else:
