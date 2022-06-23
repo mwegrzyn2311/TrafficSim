@@ -18,6 +18,7 @@ class SimulationControllerSignals(QObject):
 class SimulationController(QThread):
     city: City
     drivers: List[AbstractDriver] = []
+    drivers_to_remove: List[AbstractDriver] = []
     activation_order: Callable[[List[AbstractDriver]], Generator[AbstractDriver, None, None]] = random_activation
 
     is_paused: bool
@@ -55,8 +56,16 @@ class SimulationController(QThread):
             dest_gateway = src_dest_gateways[1]
             car = Car(src_gateway)
             src_gateway.add_car(car)
-            driver = BasicDriver(self.city, src_gateway, dest_gateway, car)
+            driver = BasicDriver(self.city, src_gateway, dest_gateway, car, self)
             self.drivers.append(driver)
+
+    def register_driver_for_removal(self, driver: AbstractDriver):
+        self.drivers_to_remove.append(driver)
+
+    def _cleanup_drivers(self):
+        for driver in self.drivers_to_remove:
+            self.drivers.remove(driver)
+        self.drivers_to_remove = []
 
     def _do_step(self):
         for driver in self.activation_order.__func__(self.drivers):

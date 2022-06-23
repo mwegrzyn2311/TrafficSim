@@ -28,3 +28,11 @@ class Road(Element):
 			return self.left_node
 		else:
 			raise Exception("Lane not in its parent or invalid method invocation")
+
+	def get_the_other_end(self, node: Node) -> Node:
+		if self.left_node == node:
+			return self.right_node
+		elif self.right_node == node:
+			return self.left_node
+		else:
+			raise Exception("Other end of the road not possible to be calculated")

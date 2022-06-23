@@ -27,6 +27,7 @@ class Car:
         self.velocity = 0
         self.acceleration = 1
 
+        self.driver = None
         self.next_planned_node_idx = -1
         self.planned_route = []
         self.next_planned_node = None

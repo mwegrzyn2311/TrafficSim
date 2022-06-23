@@ -10,8 +10,8 @@ class BasicDriver(AbstractDriver):
 	breaking_chance: float = 0.1
 	planned_route: List[Node]
 
-	def __init__(self, city: City, src: Gateway, dest: Gateway, car: Car):
-		super(BasicDriver, self).__init__(city, src, dest, car)
+	def __init__(self, city: City, src: Gateway, dest: Gateway, car: Car, simulation_controller):
+		super(BasicDriver, self).__init__(city, src, dest, car, simulation_controller)
 
 		self._init_itinerary()
 
@@ -19,7 +19,7 @@ class BasicDriver(AbstractDriver):
 		nodes: List[Node] = self.city.intersections
 		nodes += self.city.gateways
 		self.car.planned_route = calculate_dijkstra_route(self.src_gateway,  self.dest_gateway, nodes)
-		# We skip first element as its the closest one and we know how to get there while this is needed to navigate to the next one
+		# We skip first element as it's the closest one and we know how to get there while this is needed to navigate to the next one
 		self.car.next_planned_node_idx = 1
 		if self.car.next_planned_node_idx < len(self.car.planned_route):
 			self.car.next_planned_node = self.car.planned_route[self.car.next_planned_node_idx]
@@ -53,7 +53,6 @@ class BasicDriver(AbstractDriver):
 		lane.move_car(lane.get_car_cell(self.car), self.car.velocity)
 
 	def step(self):
-
 		current_element: Element = self.car.current_element
 		if isinstance(current_element, Lane):
 			self.acceleration()

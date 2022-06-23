@@ -60,9 +60,13 @@ class Lane(Element):
                         raise Exception("ERR: Car has reached gateway that is not its goal")
                     print(f"Car {self.cars[cell_from]} has reached its goal")
                     self.cars[cell_from].current_element = None
+                    self.cars[cell_from].driver.unregister()
                 else:
                     # TODO: Handle
                     pass
+            else:
+                # If car is not moving, we don't want to call del
+                return
         else:
             assert cell_from + distance not in self.cars.keys()
             self.cars[cell_from + distance] = self.cars[cell_from]
