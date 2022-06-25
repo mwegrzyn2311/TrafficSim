@@ -121,6 +121,9 @@ class RoadItem(GraphicItem):
         car_top.setZValue(17)
         car_item.addToGroup(car_top)
 
+        car_item.setTransformOriginPoint(start.x() * CELL_SIZE, start.y() * CELL_SIZE)
+        car_item.setRotation(-dir_unit_vec.angle() + 90)
+
         return car_item
 
     def update(self):
