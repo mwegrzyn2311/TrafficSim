@@ -1,11 +1,10 @@
 import math
-from typing import Dict, List
 
 from PySide6.QtCore import QLineF, QPointF, Qt
 from PySide6.QtGui import QColorConstants, QColor
-from PySide6.QtWidgets import QGraphicsItem, QGraphicsItemGroup, QGraphicsLineItem, QGraphicsRectItem
+from PySide6.QtWidgets import QGraphicsItemGroup, QGraphicsRectItem
 
-from core.model import Road, Lane, Car
+from core.model import Road, Lane
 from gui.map_visualizer.item.common import CELL_SIZE, GraphicItem
 
 LANE_WIDTH = 2
@@ -17,10 +16,9 @@ RIGHT_LANE_COLOR = QColorConstants.Red
 
 class RoadItem(GraphicItem):
     item: QGraphicsItemGroup = QGraphicsItemGroup()
-    car_items: QGraphicsRectItem
     road: Road
 
-    _car_group: QGraphicsItemGroup = QGraphicsItemGroup()
+    car_group: QGraphicsItemGroup = QGraphicsItemGroup()
 
     def __init__(self, road: Road):
         self.road = road
@@ -87,7 +85,6 @@ class RoadItem(GraphicItem):
         self.item.addToGroup(static_group)
 
     def _create_car(self, lane_no, cell_no, start_point, end_point, radius, car_color):
-        print(f"creating car at cell = {cell_no}")
         line_vector = QLineF(start_point, end_point)
 
         dir_unit_vec: QLineF = line_vector.unitVector()
@@ -99,7 +96,6 @@ class RoadItem(GraphicItem):
         normal: QLineF = line_vector.normalVector().unitVector()
         normal_diff = QPointF(normal.dx(), normal.dy())
         start: QPointF = start_point + start_node_offset + cell_offset + normal_diff * (lane_no - 0.5)
-        print(f"start={start}")
 
         car_item = QGraphicsItemGroup()
         car_bot_x: float = (start.x() - 0.25) * CELL_SIZE
@@ -128,8 +124,7 @@ class RoadItem(GraphicItem):
         return car_item
 
     def update(self):
-        self.item.removeFromGroup(self._car_group)
-        self._car_group = QGraphicsItemGroup()
+        self.car_group = QGraphicsItemGroup()
 
         start_node = self.road.right_node
         end_node = self.road.left_node
@@ -144,12 +139,10 @@ class RoadItem(GraphicItem):
             start = QPointF(start_node_x, start_node_y)
             end = QPointF(end_node_x, end_node_y)
             for pos, car in lane.cars.items():
-                self._car_group.addToGroup(self._create_car(lane_no, pos, start, end, start_node.radius, car.color))
+                self.car_group.addToGroup(self._create_car(lane_no, pos, start, end, start_node.radius, car.color))
 
         for lane_no, lane in enumerate(self.road.right_lanes):
             start = QPointF(end_node_x, end_node_y)
             end = QPointF(start_node_x, start_node_y)
             for pos, car in lane.cars.items():
-                self._car_group.addToGroup(self._create_car(lane_no, pos, start, end, start_node.radius, car.color))
-
-        self.item.addToGroup(self._car_group)
+                self.car_group.addToGroup(self._create_car(lane_no, pos, start, end, start_node.radius, car.color))

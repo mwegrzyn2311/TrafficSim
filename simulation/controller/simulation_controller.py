@@ -18,6 +18,7 @@ class SimulationControllerSignals(QObject):
 class SimulationController(QThread):
     city: City
     drivers: List[AbstractDriver] = []
+    drivers_to_remove: List[AbstractDriver] = []
     activation_order: Callable[[List[AbstractDriver]], Generator[AbstractDriver, None, None]] = random_activation
 
     is_paused: bool
@@ -32,16 +33,16 @@ class SimulationController(QThread):
 
         self.city = city
         self.is_paused = True
-        self.sleep_time = 5
+        self.sleep_time = 0.1
 
     def play(self) -> None:
         if self.is_paused:
-            self.is_paused = True
+            self.is_paused = False
             self.step_semaphore.release()
 
     def pause(self) -> None:
         if not self.is_paused:
-            self.is_paused = False
+            self.is_paused = True
 
     def step(self) -> None:
         assert self.is_paused
@@ -49,14 +50,25 @@ class SimulationController(QThread):
 
     def _generate_traffic(self):
         gateways = self.city.gateways
-        for i in range(1):
-            src_dest_gateways = random.choices(gateways, k=2)
+        for i in range(3):
+            src_dest_gateways = random.sample(gateways, k=2)
             src_gateway = src_dest_gateways[0]
+            # Avoid queues with milions of elements
+            if len(src_gateway.car_queue) > 10:
+                continue
             dest_gateway = src_dest_gateways[1]
             car = Car(src_gateway)
             src_gateway.add_car(car)
-            driver = BasicDriver(self.city, src_gateway, dest_gateway, car)
+            driver = BasicDriver(self.city, src_gateway, dest_gateway, car, self)
             self.drivers.append(driver)
+
+    def register_driver_for_removal(self, driver: AbstractDriver):
+        self.drivers_to_remove.append(driver)
+
+    def _cleanup_drivers(self):
+        for driver in self.drivers_to_remove:
+            self.drivers.remove(driver)
+        self.drivers_to_remove = []
 
     def _do_step(self):
         for driver in self.activation_order.__func__(self.drivers):

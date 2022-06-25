@@ -21,3 +21,18 @@ class Road(Element):
 		self.right_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(right_lanes_count)]
 		self.left_lanes = [Lane(self, num_of_cells=num_of_cells) for i in range(left_lanes_count)]
 
+	def get_end_node(self, lane: Lane) -> Node:
+		if lane in self.right_lanes:
+			return self.right_node
+		elif lane in self.left_lanes:
+			return self.left_node
+		else:
+			raise Exception("Lane not in its parent or invalid method invocation")
+
+	def get_the_other_end(self, node: Node) -> Node:
+		if self.left_node == node:
+			return self.right_node
+		elif self.right_node == node:
+			return self.left_node
+		else:
+			raise Exception("Other end of the road not possible to be calculated")

@@ -55,4 +55,6 @@ class MapSceneManager:
 	def update(self):
 		print("Updating ui...")
 		for road in self._roads:
+			self.scene.removeItem(road.car_group)
 			road.update()
+			self.scene.addItem(road.car_group)

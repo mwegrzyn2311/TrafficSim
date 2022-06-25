@@ -12,7 +12,7 @@
       "intersection_type": "prio_to_right",
       "pos": {
         "x": 0,
-        "y": 25
+        "y": 50
       },
       "id": "1"
     },
@@ -39,27 +39,6 @@
         "y": 50
       },
       "id": "g1"
-    },
-    {
-      "pos": {
-        "x": -25,
-        "y": 25
-      },
-      "id": "g2"
-    },
-    {
-      "pos": {
-        "x": 0,
-        "y": 50
-      },
-      "id": "g3"
-    },
-    {
-      "pos": {
-        "x": 25,
-        "y": 25
-      },
-      "id": "g4"
     }
   ],
   "roads": [
@@ -86,24 +65,6 @@
       "right_lanes_count": 1,
       "left_node": "2",
       "right_node": "g1"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "1",
-      "right_node": "g2"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "1",
-      "right_node": "g3"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "1",
-      "right_node": "g4"
     }
   ]
 }
