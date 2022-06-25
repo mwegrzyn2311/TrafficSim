@@ -12,7 +12,7 @@ class AbstractDriver(ABC):
 
 	planned_route: List[Node]
 
-	car: Car
+	car: Car or None
 
 	def __init__(self, city: City, src: Gateway, dest: Gateway, car: Car, simulation_controller) -> None:
 		self.src_gateway = src
@@ -29,3 +29,5 @@ class AbstractDriver(ABC):
 
 	def unregister(self):
 		self.simulation_controller.register_driver_for_removal(self)
+		self.car.driver = None
+		self.car = None

@@ -16,9 +16,7 @@ class BasicDriver(AbstractDriver):
 		self._init_itinerary()
 
 	def _init_itinerary(self):
-		nodes: List[Node] = self.city.intersections
-		nodes += self.city.gateways
-		self.car.planned_route = calculate_dijkstra_route(self.src_gateway,  self.dest_gateway, nodes)
+		self.car.planned_route = calculate_dijkstra_route(self.src_gateway,  self.dest_gateway, self.city.intersections + self.city.gateways)
 		# We skip first element as it's the closest one and we know how to get there while this is needed to navigate to the next one
 		self.car.next_planned_node_idx = 1
 		if self.car.next_planned_node_idx < len(self.car.planned_route):

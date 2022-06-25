@@ -24,6 +24,9 @@ class Gateway(Node):
 		self.car_queue.append(car)
 
 	def step(self) -> None:
+		# FIXME: Working only for one-lane roads
+		if self.road.right_lanes[0].get_cell(0) is not None:
+			return
 		if len(self.car_queue) > 0:
 			to_push = self.car_queue.pop(0)
 			for lane in self.road.right_lanes:

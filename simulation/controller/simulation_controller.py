@@ -54,7 +54,7 @@ class SimulationController(QThread):
             src_dest_gateways = random.sample(gateways, k=2)
             src_gateway = src_dest_gateways[0]
             # Avoid queues with milions of elements
-            if len(src_gateway.car_queue) > 10:
+            if len(src_gateway.car_queue) > 4:
                 continue
             dest_gateway = src_dest_gateways[1]
             car = Car(src_gateway)
@@ -71,6 +71,7 @@ class SimulationController(QThread):
         self.drivers_to_remove = []
 
     def _do_step(self):
+        self._cleanup_drivers()
         for driver in self.activation_order.__func__(self.drivers):
             driver.step()
 
