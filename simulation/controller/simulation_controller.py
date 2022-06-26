@@ -3,6 +3,7 @@ from typing import List, Callable, Generator
 
 from PySide6.QtCore import QThread, QObject, QSemaphore, Signal, Slot
 
+from ..stats import SimmStats
 from core.driver.abstract_driver import AbstractDriver
 from core.driver.basic_driver import BasicDriver
 from core.model import City, Car
@@ -27,6 +28,8 @@ class SimulationController(QThread):
 
     signal = SimulationControllerSignals()
     step_semaphore = QSemaphore(0)
+
+    stats: SimmStats = SimmStats()
 
     def __init__(self, city: City, parent=None):
         super(SimulationController, self).__init__(parent)
@@ -71,13 +74,17 @@ class SimulationController(QThread):
         self.drivers_to_remove = []
 
     def _do_step(self):
-        self._cleanup_drivers()
+        self.stats.next_turn()
         for driver in self.activation_order.__func__(self.drivers):
             driver.step()
 
         self._generate_traffic()
         self.city.step()
         self.signal.step.emit()
+
+        self._cleanup_drivers()
+        self.stats.register_num_of_drivers(len(self.drivers))
+        self.city.fill_stats()
 
     def run(self):
         while True:
