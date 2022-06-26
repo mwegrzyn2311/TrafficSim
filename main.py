@@ -18,8 +18,6 @@ logging.info("Version: 0.0.1")
 logging.info("Pyside version: " + PySide6.__version__)
 logging.info("QtCore version: " + PySide6.QtCore.__version__)
 
-city = load_city_from_json("resources/city.json")
-
 app = QApplication(sys.argv)
 
 window = gui.MainWindow()

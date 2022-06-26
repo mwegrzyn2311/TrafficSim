@@ -24,7 +24,8 @@ class MapSceneManager:
 		roads = set()
 		for gateway in city.gateways:
 			self.create_gateway(gateway)
-			roads.add(gateway.road)
+			if hasattr(gateway, 'road'):
+				roads.add(gateway.road)
 
 		self._intersections = []
 		for intersection in city.intersections:
@@ -53,7 +54,6 @@ class MapSceneManager:
 		self.scene.addItem(intersection_item.item)
 
 	def update(self):
-		print("Updating ui...")
 		for road in self._roads:
 			self.scene.removeItem(road.car_group)
 			road.update()

@@ -15,7 +15,10 @@ class Gateway(Node):
 		self.road = road
 
 	def get_roads(self) -> List["Road"]:
-		return [self.road]
+		if not hasattr(self, 'road'):
+			return []
+		else:
+			return [self.road]
 
 	def get_type_str(self) -> str:
 		return "gateway"
