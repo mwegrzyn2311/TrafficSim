@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>398</width>
-    <height>300</height>
+    <height>333</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -41,6 +41,13 @@
          </property>
          <property name="text">
           <string>Play</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="save_statistic">
+         <property name="text">
+          <string>Save statistic</string>
          </property>
         </widget>
        </item>
@@ -91,9 +98,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>save_statistic</sender>
+   <signal>clicked()</signal>
+   <receiver>simulation_view</receiver>
+   <slot>saveStatistic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>309</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>playPause()</slot>
   <slot>step()</slot>
+  <slot>saveStatistic()</slot>
  </slots>
 </ui>

@@ -56,7 +56,10 @@ class City:
 				self.stats.register_cars_per_road(road, in_road)
 				analysed_roads.append(road)
 
-		avg_spd = total_spd / total
+		if total == 0:
+			avg_spd = 0
+		else:
+			avg_spd = total_spd / total
 		self.stats.register_speed(min_spd, max_spd, avg_spd)
 
 		in_gateways = 0

@@ -1,4 +1,5 @@
 import logging
+import csv
 
 from PySide6.QtCore import Slot
 
@@ -9,6 +10,9 @@ from .switchable_view import SwitchableView
 from ..generated.ui_simulation_view import Ui_simulation_view
 from ..map_visualizer import MapSceneManager
 from ..util import ScalableMovableViewController
+from simulation.stats import SimmStats
+
+import csv
 
 
 class SimulationViewController(SwitchableView):
@@ -18,6 +22,8 @@ class SimulationViewController(SwitchableView):
     _city: City
 
     _is_paused: bool = True
+
+    simm_stats: SimmStats = SimmStats()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -37,6 +43,24 @@ class SimulationViewController(SwitchableView):
         self._simulation_controller = SimulationController(self._city)
         self._simulation_controller.signal.step.connect(self.update)
         self._simulation_controller.start()
+
+    # noinspection PyPep8Naming
+    @Slot()
+    def saveStatistic(self) -> None:
+        header = ["turn", "total_drivers", "min_speed", "avg_speed", "max_speed"]
+        with open("stats.csv", "w+", newline="") as file:
+            writer: csv.DictWriter = csv.writer(file)
+            writer.writerow(header)
+            for turn in self.simm_stats.stats_per_turn.items():
+                writer.writerow(
+                    [
+                        turn[0],
+                        turn[1]["city"]["total"],
+                        turn[1]["speed"]["min"],
+                        turn[1]["speed"]["avg"],
+                        turn[1]["speed"]["max"]
+                    ]
+                )
 
     # noinspection PyPep8Naming
     @Slot()

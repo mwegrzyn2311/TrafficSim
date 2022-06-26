@@ -3,170 +3,26 @@
     {
       "intersection_type": "prio_to_right",
       "pos": {
-        "x": -75,
-        "y": -50
+        "x": 0,
+        "y": 0
       },
       "id": "0"
-    },
-    {
-      "intersection_type": "prio_to_right",
-      "pos": {
-        "x": 75,
-        "y": -50
-      },
-      "id": "3"
-    },
-    {
-      "intersection_type": "prio_to_right",
-      "pos": {
-        "x": -75,
-        "y": 50
-      },
-      "id": "8"
-    },
-    {
-      "intersection_type": "prio_to_right",
-      "pos": {
-        "x": 75,
-        "y": 50
-      },
-      "id": "11"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": -25,
-        "y": -50
-      },
-      "id": "1"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": 25,
-        "y": -50
-      },
-      "id": "2"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": -75,
-        "y": 0
-      },
-      "id": "4"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": -25,
-        "y": 0
-      },
-      "id": "5"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": 25,
-        "y": 0
-      },
-      "id": "6"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": 75,
-        "y": 0
-      },
-      "id": "7"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": -25,
-        "y": 50
-      },
-      "id": "9"
-    },
-    {
-      "intersection_type": "with_lights",
-      "pos": {
-        "x": 25,
-        "y": 50
-      },
-      "id": "10"
     }
   ],
   "gateways": [
     {
       "pos": {
-        "x": -75,
-        "y": -75
+        "x": 0,
+        "y": 75
       },
       "id": "g0"
     },
     {
       "pos": {
-        "x": -100,
-        "y": -50
+        "x": 75,
+        "y": 0
       },
       "id": "g1"
-    },
-    {
-      "pos": {
-        "x": -100,
-        "y": 0
-      },
-      "id": "g2"
-    },
-    {
-      "pos": {
-        "x": -100,
-        "y": 50
-      },
-      "id": "g3"
-    },
-    {
-      "pos": {
-        "x": -75,
-        "y": 75
-      },
-      "id": "g4"
-    },
-    {
-      "pos": {
-        "x": 75,
-        "y": -75
-      },
-      "id": "g5"
-    },
-    {
-      "pos": {
-        "x": 100,
-        "y": -50
-      },
-      "id": "g6"
-    },
-    {
-      "pos": {
-        "x": 100,
-        "y": 0
-      },
-      "id": "g7"
-    },
-    {
-      "pos": {
-        "x": 100,
-        "y": 50
-      },
-      "id": "g8"
-    },
-    {
-      "pos": {
-        "x": 75,
-        "y": 75
-      },
-      "id": "g9"
     }
   ],
   "roads": [
@@ -181,156 +37,6 @@
       "right_lanes_count": 1,
       "left_node": "0",
       "right_node": "g1"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "1",
-      "right_node": "0"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "2",
-      "right_node": "1"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "3",
-      "right_node": "2"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "3",
-      "right_node": "g6"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "3",
-      "right_node": "g5"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "4",
-      "right_node": "g2"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "5",
-      "right_node": "4"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "6",
-      "right_node": "5"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "7",
-      "right_node": "6"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "7",
-      "right_node": "g7"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "0",
-      "right_node": "4"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "1",
-      "right_node": "5"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "2",
-      "right_node": "6"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "3",
-      "right_node": "7"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "4",
-      "right_node": "8"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "5",
-      "right_node": "9"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "6",
-      "right_node": "10"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "7",
-      "right_node": "11"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "9",
-      "right_node": "8"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "10",
-      "right_node": "9"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "11",
-      "right_node": "10"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "8",
-      "right_node": "g3"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "8",
-      "right_node": "g4"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "11",
-      "right_node": "g8"
-    },
-    {
-      "left_lanes_count": 1,
-      "right_lanes_count": 1,
-      "left_node": "11",
-      "right_node": "g9"
     }
   ]
 }
